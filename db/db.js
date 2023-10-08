@@ -1,6 +1,6 @@
 
 const mongoose = require('mongoose');
-const mongoURI = 'mongodb+srv://admin:HPWlLrGH8a0iyUtY@cluster0.hhn9kde.mongodb.net/catalogo?retryWrites=true&w=majority';
+const mongoURI = 'mongodb+srv://admin:bXOST10bVcRzALzc@cluster0.hhn9kde.mongodb.net/edist?retryWrites=true&w=majority';
 
 function connect() {
   mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
