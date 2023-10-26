@@ -1,15 +1,30 @@
+const mysql = require("mysql");
 
-const mongoose = require('mongoose');
-const mongoURI = 'mongodb+srv://admin:bXOST10bVcRzALzc@cluster0.hhn9kde.mongodb.net/edist?retryWrites=true&w=majority';
+let conexion = mysql.createConnection({
+  host: "barqlbm57xrezrrgni5w-mysql.services.clever-cloud.com",
+  database: "barqlbm57xrezrrgni5w",
+  user: "unutjes8ehbvijub",
+  password: "J5sMoY4zsKEx7NWvavKH"
+});
 
-function connect() {
-  mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
-    .then(() => {
-      console.log('Conexión exitosa a MongoDB');
-    })
-    .catch((error) => {
-      console.error('Error al conectar a MongoDB', error);
-    });
-}
+conexion.connect(function (err) {
+  if(err){
+    throw err;
+  }else{
+    console.log("Conexion exitosa");
+    const comprobacion = `SELECT * from user`;
+    conexion.query(comprobacion, (error, results) => {
+    if (error) {
+      console.error('Error al ejecutar la consulta:', error);
+    } else {
+      if (results.length > 0) {
+        // La consulta devolvió resultados
+        console.log(results);
+      } 
+    }
+    });
+  }
+});
 
-module.exports = { connect };
+
+module.exports = { conexion, mysql };
