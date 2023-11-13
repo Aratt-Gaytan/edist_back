@@ -9,7 +9,7 @@ function generateToken(user){
 
 exports.login = (req, res) => {
     const { registration_number, password } = req.body;
-    const comprobacion = `SELECT iduser, registration_number, password FROM user WHERE registration_number = '${registration_number}' AND password = '${password}'`;
+    const comprobacion = `SELECT iduser, name, lastNames, registration_number, password FROM user WHERE registration_number = '${registration_number}' AND password = '${password}'`;
     conexion.query(comprobacion, (error, results) => {
       if (error) {
         console.error('Error al ejecutar la consulta:', error);
@@ -17,13 +17,13 @@ exports.login = (req, res) => {
         if (results.length > 0) {
           console.log(results);
           bToken = generateToken(results);
-          res.setHeader('Authorization', bToken);
-          res.setHeader('Id', results[0].iduser);
-          res.status(200).send({ hello: "Acceso Concedido:)", token: bToken });
+          // res.setHeader('Authorization', bToken);
+          // res.setHeader('Id', results[0].iduser);
+          res.json({ hello: "Acceso Concedido:)", token: bToken, userdata: results });
         } else {
-          res.redirect('/index.html');
+          // res.redirect('/index.html');
           // res.sendFile(__dirname + '../public/index.html');
-          // res.status(401).send({ hello: "Acceso Denegado:(" });
+          res.status(401).send({ hello: "Acceso Denegado:(" });
         }
       }
     });

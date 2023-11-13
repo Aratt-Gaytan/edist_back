@@ -8,4 +8,6 @@ const courseController = require('../controllers/courses/courseController');
 router.post('/index', authController.login);
 router.post('/register', authController.register);
 router.post('/registroCursos', courseController.registerCursos);
+router.post('/getCursos', courseController.getCursos);
+router.post('/getPosts/:iduser/:idcurse/:idmodule', courseController.getPosts);
 module.exports = router;
